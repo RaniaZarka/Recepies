@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 const {fontFamily} = require("tailwindcss/defaultTheme")
+
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,11 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      Colors:{
+      colors:{
         primary:"#038C7F",
         secondary: "#F2C641",
         tertiary:{
-          dark: "#F27405",
+          dark: "#0568F2",
           light:"#F2C641",
         },
 
