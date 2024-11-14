@@ -11,12 +11,17 @@ const config: Config = {
   theme: {
     extend: {
       colors:{
-        primary:"#038C7F",
-        secondary: "#F2C641",
+        primary:"#A8D5BA",
+        secondary: "#FFA500",
+
         tertiary:{
-          dark: "#0568F2",
+          dark: "#FF6F61",
           light:"#F2C641",
         },
+        text: {
+          darkCharcoal: "#333333", // Dark Charcoal for text
+        },
+        
 
     },
     fontFamily:{
