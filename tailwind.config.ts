@@ -11,6 +11,7 @@ const config: Config = {
   theme: {
     extend: {
       colors:{
+        softWhite: '#f9f9f9',
         primary:"#A8D5BA",
         secondary: "#FFA500",
 
@@ -29,6 +30,8 @@ const config: Config = {
     }
   },
   },
-  plugins: [],
+  plugins: [
+     require('@tailwindcss/aspect-ratio'),
+  ],
 }
 export default config

@@ -1,12 +1,12 @@
-import Image from "next/image";
-import food from "@/Images/food.jpg";
+
+import HeroSection from '@/components/HeroSection/HeroSection';
 
 const Home = () => {
   return (
 
-    <> <div className="flex items-center justify-center min-h-screen">
-      <Image src={food} alt="Image" width={500} height={500} />
-    </div>
+    <>
+      <HeroSection />
+
     </>
   )
 };
