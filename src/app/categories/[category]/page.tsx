@@ -7,12 +7,12 @@ import Image from "next/image";
 async function getCategoryRecipes(category: string) {
     const recipesData = {
         breakfast: [
-            { id: "1", title: "Avocado Toast", image: "/Images/avocado-toast.jpg" },
-            { id: "2", title: "Pancakes", image: "/Images/breakfast.jpg" },
+            { id: 1, title: "Avocado Toast", image: "/Images/avocado-toast.jpg" },
+            { id: 2, title: "Pancakes", image: "/Images/breakfast.jpg" },
         ],
         salads: [
-            { id: "3", title: "Caesar Salad", image: "/Images/breakfast.jpg" },
-            { id: "4", title: "Greek Salad", image: "/Images/breakfast.jpg" },
+            { id: 3, title: "Caesar Salad", image: "/Images/breakfast.jpg" },
+            { id: 4, title: "Greek Salad", image: "/Images/breakfast.jpg" },
         ],
         bread: [{ id: 5, title: "Baguette", image: "/Images/bread.jpg" },
         { id: 6, title: "Pain au lait", image: "/Images/bread.jpg" }
@@ -53,7 +53,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
             <h1 className="text-3xl font-bold mb-4">Recipes for {category}</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {recipes.map((recipe) => (
+                {recipes.map((recipe: any) => (
                     <Link href={`/recipes/${recipe.id}`} key={recipe.id}>
                         <div className="bg-white shadow-md rounded-md overflow-hidden cursor-pointer transform hover:scale-105 transition-transform">
                             <div className="relative aspect-w-16 aspect-h-9">
