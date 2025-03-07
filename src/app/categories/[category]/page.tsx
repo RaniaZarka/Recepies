@@ -39,8 +39,8 @@ async function getCategoryRecipes(category: string) {
     return recipesData[category] || null;
 }
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
-    const { category } = params;
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+    const { category } = await params;
 
     const recipes = await getCategoryRecipes(category);
 
