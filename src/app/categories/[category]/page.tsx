@@ -7,7 +7,7 @@ import Image from "next/image";
 async function getCategoryRecipes(category: string) {
     const recipesData = {
         breakfast: [
-            { id: "1", title: "Avocado Toast", image: "/Images/breakfast.jpg" },
+            { id: "1", title: "Avocado Toast", image: "/Images/avocado-toast.jpg" },
             { id: "2", title: "Pancakes", image: "/Images/breakfast.jpg" },
         ],
         salads: [

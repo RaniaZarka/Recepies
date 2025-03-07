@@ -1,25 +1,31 @@
 import Link from "next/link";
-import { BiMessageDetail } from "react-icons/bi";
-import { BsFillSendFill, BsTelephoneOutbound } from "react-icons/bs";
+import { BsFillSendFill } from "react-icons/bs";
 
 const Footer = () => {
     return (
-        <footer className="mt-16 bg-tertiary-light h-16">
+        <footer className="mt-auto bg-tertiary-light h-16">
             <div className="container mx-auto px-4 mb-5 h-full">
                 <div className="flex flex-wrap md:flex-nowrap sm:gap-4 md:gap-16 items-center justify-between h-full">
-                    <p className="text-sm md:text-base">Address</p>
+                    <p className="text-sm md:text-base">Copyright  © 2025 The Recipes </p>
                     <div className="flex items-center">
-                        <BsFillSendFill />
-                        <p className="ml-2 text-sm md:text-base">Message</p>
+
+                        {/* Message Button */}
+                        <a
+                            href="mailto:RaniaZarka@hotmail.com?subject=Message from The Recipies&body=Hello,"
+                            className="flex items-center hover:-translate-y-2 duration-500 transition-all"
+                        >
+                            <BsFillSendFill />
+                            <p className="ml-2 text-sm md:text-base">Message</p>
+                        </a>
                     </div>
                     <div className="flex items-center">
-                        <BsTelephoneOutbound />
-                        <p className="ml-2 text-sm md:text-base">Phone number</p>
+
+                        {/* About Us Link */}
+                        <Link href="/about" className="flex items-center hover:-translate-y-2 duration-500 transition-all">
+                            <p className="ml-2 text-sm md:text-base">About us</p>
+                        </Link>
                     </div>
-                    <div className="flex items-center">
-                        <BiMessageDetail />
-                        <p className="ml-2 text-sm md:text-base">Info</p>
-                    </div>
+
                 </div>
             </div>
         </footer>
