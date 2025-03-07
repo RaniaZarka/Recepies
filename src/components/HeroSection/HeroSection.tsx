@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import food from "@/Images/food.jpg";
+
 const HeroSection = () => {
 
     const categories = [
@@ -18,7 +19,7 @@ const HeroSection = () => {
         <div className="container mx-auto px-4 py-8">
             {/* Hero Section */}
             <section className="text-center mb-8">
-                <h1 className="text-4xl font-bold text-gray-800 mb-4">
+                <h1 className="font-heading mb-4">
                     Discover Recipes You&apos;ll Love
                 </h1>
                 <p className="text-lg text-gray-600">
@@ -57,8 +58,8 @@ const HeroSection = () => {
                 </div>
 
                 {/* Latest Recipes Sidebar */}
-                <aside className="w-full lg:w-1/3 px-4  mt-8 lg:mt-0 ">
-                    <h2 className="text-2xl font-bold mb-4">Latest Recipes</h2>
+                <aside className="w-full lg:w-1/4 px-4  mt-8 lg:mt-0 lg:ml-32 ">
+                    <h2 className="font-sub-heading mb-4">Latest Recipes</h2>
                     <div className="space-y-4">
                         {[...Array(4)].map((_, index) => (
                             <div

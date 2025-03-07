@@ -6,4 +6,5 @@ import cuisine from './cuisine';
 import recipeIngredient from './recipeIngredient';
 import imageObject from './imageObject';
 
+
 export const schemaTypes = [recipe, ingredient, tag, cuisine, recipeIngredient, imageObject];
