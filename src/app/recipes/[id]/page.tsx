@@ -37,8 +37,10 @@ async function getRecipeData(id: string) {
     return recipesData[id] || null;
 }
 
-export default async function RecipePage({ params }: { params: { id: string } }) {
-    const { id } = params;
+export default async function RecipePage({ params }: {
+    params: Promise<{ id: string }>
+}) {
+    const { id } = await params;
 
     const recipe = await getRecipeData(id);
 
