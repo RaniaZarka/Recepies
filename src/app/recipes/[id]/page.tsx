@@ -7,7 +7,7 @@ async function getRecipeData(id: string) {
     const recipesData = {
         "1": {
             title: "Avocado Toast",
-            keywords: ["Main dish", "Vegan", "Vegetarian", "American"],
+            keywords: ["Vegan", "Vegetarian", "American", "Breakfast"],
             image: "/images/avocado-toast.jpg",
             prepTime: "10 mins",
             cookTime: "5 mins",
@@ -18,7 +18,7 @@ async function getRecipeData(id: string) {
         },
         "2": {
             title: "Pancakes",
-            keywords: ["Main dish", "Vegan", "American"],
+            keywords: ["Vegan", "American", "Breakfast"],
             image: "/images/pancakes.jpg",
             prepTime: "5 mins",
             cookTime: "10 mins",

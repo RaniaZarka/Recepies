@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .img {
+  @apply object-cover w-full h-full;
+}
+
+.scale-animation {
+  @apply hover:scale-125 transition-all duration:700;
+} */
+
+.btn-primary {
+  @apply px-6 md:px-[50px] lg:px-[72px] py-2 md:py-5 bg-primary rounded-lg md:rounded-2xl shadow-sm shadow-primary text-white font-bold text-base md:text-xl hover:scale-110 duration-300 transition-all;
+}
+
+.btn-tertiary {
+  @apply px-6 md:px-[50px] lg:px-[72px] py-2 md:py-5 bg-tertiary-light rounded-lg md:rounded-2xl shadow-sm shadow-tertiary-light text-white font-bold text-base md:text-xl hover:scale-110 duration-300 transition-all;
+}
+
+.font-heading {
+  @apply font-medium md:font-semibold md:text-5xl text-2xl;
+}
+
+.font-sub-heading {
+  @apply font-medium md:font-semibold md:text-3xl text-xl;
+}
+
+.font-bold-medium{
+  @apply font-medium md:font-semibold md:text-xl text-lg;
+}
+.font-normal {
+  @apply text-sm md:text-base ;
+}
+/* Navigation link */
+.nav-link {
+  @apply text-gray-700 hover:text-gray-900 transition-colors duration-300;
+}
+
+/* Modal Overlay*/
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50;
+}
+
+.modal-content {
+  @apply bg-white p-6 rounded-lg shadow-lg w-auto max-w-[600px] relative;
+}
+
+.modal-close {
+  @apply absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl;
+}
+
+/* Grid Recipes on Overlay*/
+.recipe-grid {
+  @apply grid grid-cols-2  md:grid-cols-4 gap-16 md:gap-x-48;
+}
+
+
+
