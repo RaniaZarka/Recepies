@@ -1,15 +1,5 @@
 {
   "pages": {
-    "/(cms)/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(cms)/layout.js"
-    ],
-    "/(cms)/studio/[[...index]]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(cms)/studio/[[...index]]/page.js"
-    ],
     "/(web)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -31,15 +21,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/categories/layout.js"
     ],
-    "/recipes/[id]/page": [
+    "/(cms)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/recipes/[id]/page.js"
+      "static/chunks/app/(cms)/layout.js"
     ],
-    "/recipes/layout": [
+    "/(cms)/studio/[[...index]]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/recipes/layout.js"
+      "static/chunks/app/(cms)/studio/[[...index]]/page.js"
     ]
   }
 }

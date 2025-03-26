@@ -1,5 +1,5 @@
 {
-  "/(cms)/studio/[[...index]]/page": "app/(cms)/studio/[[...index]]/page.js",
+  "/(web)/page": "app/(web)/page.js",
   "/categories/[category]/page": "app/categories/[category]/page.js",
-  "/(web)/page": "app/(web)/page.js"
+  "/(cms)/studio/[[...index]]/page": "app/(cms)/studio/[[...index]]/page.js"
 }
