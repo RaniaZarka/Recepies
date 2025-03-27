@@ -11,26 +11,20 @@ interface Recipe {
         current: string;
     };
     image: any;
-    prepTime: string;
-    cookTime: string;
-    servings: string;
-    difficulty: string;
+
 }
 
 export default async function CategoryPage({ params }: { params: { category: string } }) {
     // Convert slug back to category title
-    const categoryTitle = params.category.replace(/-/g, ' ').toLowerCase();
+    const categoryTitle = params.category;
 
     const query = groq`
-    *[_type == "recipe" && references(*[_type == "category" && lower(title) == $category][0]._id)]{
-      _id,
+    *[_type == "recipe" && category->slug.current ==lower($category)]{
+    _id,
       title,
       slug,
       image,
-      prepTime,
-      cookTime,
-      servings,
-      difficulty
+      
     }
   `;
 
@@ -38,37 +32,41 @@ export default async function CategoryPage({ params }: { params: { category: str
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-6 capitalize">{categoryTitle} Recipes</h1>
+            <div>
+                <h1 className="text-3xl font-bold mb-6 ">{categoryTitle.charAt(0).toUpperCase() + categoryTitle.slice(1)} Recipes</h1>
+            </div>
+            <div>
+                {recipes.length === 0 ? (
+                    <p>No recipes found for this category.</p>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {recipes.map((recipe) => (
+                            <Link href={`/recipes/${recipe.slug.current}`} key={recipe._id}>
+                                <div className="bg-white shadow-md rounded-md overflow-hidden hover:scale-105 transition-transform">
+                                    <div className="relative w-full h-48">
+                                        <Image
+                                            src={
+                                                recipe.image
+                                                    ? urlFor(recipe.image).width(600).height(400).url()
+                                                    : "/fallback.jpg" // Use a local placeholder image
+                                            }
+                                            alt={recipe.slug || recipe.title || 'Recipe image'} // fallback text
+                                            fill
+                                            style={{ objectFit: 'cover' }}
+                                        />
+                                    </div>
+                                    <div className="p-4">
+                                        <h2 className="text-xl font-semibold">{recipe.title}</h2>
 
-            {recipes.length === 0 ? (
-                <p>No recipes found for this category.</p>
-            ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {recipes.map((recipe) => (
-                        <Link href={`/recipes/${recipe.slug.current}`} key={recipe._id}>
-                            <div className="bg-white shadow-md rounded-md overflow-hidden hover:scale-105 transition-transform">
-                                <div className="relative w-full h-48">
-                                    <Image
-                                        src={urlFor(recipe.image).width(600).height(400).url()}
-                                        alt={recipe.title}
-                                        fill
-                                        style={{ objectFit: 'cover' }}
-                                    />
+                                    </div>
                                 </div>
-                                <div className="p-4">
-                                    <h2 className="text-xl font-semibold">{recipe.title}</h2>
-                                    <p className="text-gray-600 text-sm">
-                                        Prep: {recipe.prepTime} | Cook: {recipe.cookTime}
-                                    </p>
-                                    <p className="text-gray-600 text-sm">
-                                        Servings: {recipe.servings} | Difficulty: {recipe.difficulty}
-                                    </p>
-                                </div>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-            )}
+
+                            </Link>
+                        ))}
+                    </div>
+
+                )}
+            </div>
         </div>
     );
 }

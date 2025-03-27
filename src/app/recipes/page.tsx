@@ -19,20 +19,16 @@ interface Recipe {
 
 export default async function CategoryPage({ params }: { params: { category: string } }) {
   // Convert slug back to category title
-  const categoryTitle = params.category.replace(/-/g, ' ').toLowerCase();
+  const categoryTitle = params.category;
 
   const query = groq`
-    *[_type == "recipe" && references(*[_type == "category" && lower(title) == $category][0]._id)]{
-      _id,
-      title,
-      slug,
-      image,
-      prepTime,
-      cookTime,
-      servings,
-      difficulty
-    }
-  `;
+  *[_type == "recipe" && category->slug.current == $category]{
+    title,
+    slug,
+    image,
+    
+  }
+`;
 
   const recipes: Recipe[] = await client.fetch(query, { category: categoryTitle });
 
