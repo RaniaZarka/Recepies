@@ -11,25 +11,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(web)/page.js"
     ],
-    "/(cms)/layout": [
+    "/(web)/categories/[category]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(cms)/layout.js"
-    ],
-    "/(cms)/studio/[[...index]]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(cms)/studio/[[...index]]/page.js"
-    ],
-    "/categories/[category]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/categories/[category]/page.js"
-    ],
-    "/categories/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/categories/layout.js"
+      "static/chunks/app/(web)/categories/[category]/page.js"
     ],
     "/_not-found/page": [
       "static/chunks/webpack.js",
