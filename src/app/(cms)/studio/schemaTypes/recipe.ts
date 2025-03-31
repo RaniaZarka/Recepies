@@ -68,10 +68,12 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'images',
-      title: 'Images',
-      type: 'array',
-      of: [{ type: 'imageObject' }],
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options:{
+       hotspot:true,
+      }
     }),
     defineField({
       name: 'tag',
