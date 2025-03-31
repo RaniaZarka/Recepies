@@ -84,7 +84,7 @@ export default async function RecipePage({ params }: { params: { slug: string } 
                 )}
 
                 {/* Ingredients */}
-                <div className='ml-20'>
+                <div className='ml-0 lg:ml-20'>
                     <h2 className="text-2xl font-semibold mb-4">Ingredients</h2>
                     <ul className="list-disc list-inside text-gray-800">
                         {recipe.ingredient?.map((ing, i) => (
