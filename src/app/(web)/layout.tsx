@@ -24,16 +24,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-
-      <body className={`${poppins.className} bg-softWhite text-gray-900`}>
+      <body className={`${poppins.className} bg-softWhite text-gray-900 min-h-screen flex flex-col`}>
         <ThemeProvider>
-          <main className='font-normal'>
-            <Header />
+          <Header />
+          <main className="flex-grow font-normal">
             {children}
-            <Footer />
           </main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

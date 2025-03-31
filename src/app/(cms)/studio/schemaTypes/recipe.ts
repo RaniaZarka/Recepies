@@ -84,8 +84,9 @@ export default defineType({
     defineField({
       name: 'cuisine',
       title: 'Cuisine',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'cuisine' }] }],
+      type: 'reference',
+      to: [{ type: 'cuisine' }],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'ingredient',
