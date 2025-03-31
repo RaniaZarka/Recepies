@@ -16,7 +16,7 @@ interface Recipe {
 
 interface CategoryPageProps {
     params: {
-        category: string;
+        category: any;
     };
 }
 
