@@ -2,7 +2,7 @@ import Header from '@/components/Header/header';
 import './globals.css'
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
-import Footer from '@/components/Footer/footer';
+
 import ThemeProvider from '@/components/ThemeProvider/ThemeProvider';
 
 const poppins = Poppins({
@@ -30,7 +30,7 @@ export default function RootLayout({
           <main className="flex-grow font-normal">
             {children}
           </main>
-          <Footer />
+
         </ThemeProvider>
       </body>
     </html>

@@ -1,8 +1,3 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/(web)/categories/[category]/page": "app/(web)/categories/[category]/page.js",
-  "/(cms)/studio/[[...index]]/page": "app/(cms)/studio/[[...index]]/page.js",
-  "/(web)/page": "app/(web)/page.js",
-  "/(web)/about/page": "app/(web)/about/page.js",
-  "/(web)/recipes/[slug]/page": "app/(web)/recipes/[slug]/page.js"
+  "/(web)/page": "app/(web)/page.js"
 }
