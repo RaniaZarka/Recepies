@@ -5,6 +5,7 @@ import client from '@/sanity/sanityClient';
 import { urlFor } from '@/sanity/imageBuilder';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
 interface Recipe {
     _id: string;
@@ -16,9 +17,21 @@ interface Recipe {
 
 }
 
-// eslint-disable-next-line @next/next/no-async-client-component
-export default async function CategoryPage({ params }: { params: { category: string } }) {
-    // Convert slug back to category title
+interface CategoryPageProps {
+    params: {
+        category: string;
+    };
+}
+
+// ✅ Dynamic metadata function (for SEO)
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+    return {
+        title: `${params.category} Recipes`,
+    };
+}
+
+// ✅ Page component
+export default async function CategoryPage({ params }: CategoryPageProps) {
     const categoryTitle = params.category;
 
     const query = groq`
