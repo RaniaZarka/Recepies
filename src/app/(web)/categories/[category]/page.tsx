@@ -16,16 +16,21 @@ interface Recipe {
 
 interface CategoryPageProps {
     params: {
-        category: any;
+        category: string;
     };
 }
 
 // ✅ THIS IS THE RIGHT WAY TO DO METADATA
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({
+    params,
+}: {
+    params: { category: string };
+}): Promise<Metadata> {
     return {
         title: `${params.category} Recipes`,
     };
 }
+
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
     const categoryTitle = params.category;
