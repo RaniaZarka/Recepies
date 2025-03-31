@@ -15,13 +15,13 @@ interface Recipe {
 }
 
 interface CategoryPageProps {
-    params: {
+    params: Promise<{
         category: string;
-    };
+    }>;
 }
 
 // ✅ THIS IS THE RIGHT WAY TO DO METADATA
-export async function generateMetadata({
+/* export async function generateMetadata({
     params,
 }: {
     params: { category: string };
@@ -29,11 +29,11 @@ export async function generateMetadata({
     return {
         title: `${params.category} Recipes`,
     };
-}
+} */
 
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-    const categoryTitle = params.category;
+    const categoryTitle = (await params).category;
 
     const query = groq`
     *[_type == "recipe" && category->slug.current == lower($category)] {
