@@ -28,12 +28,12 @@ export default function HeroSection() {
             </section>
 
             {/* Main Content */}
-            <div className="flex flex-wrap -mx-4">
+            <div className="flex flex-wrap -mx-6">
                 {/* Recipe Categories Grid */}
                 <div className="w-full lg:w-2/3 px-4">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         {categories.map((category, index) => (
-                            <Link href={`/categories/${slugify(category.title)}`} key={index}>
+                            <Link href={`/explore/${slugify(category.title)}`} key={index}>
                                 <div className="bg-white shadow-md rounded-md overflow-hidden cursor-pointer transform hover:scale-105 transition-transform">
                                     <div className="relative aspect-[16/9]">
                                         <Image
@@ -53,7 +53,7 @@ export default function HeroSection() {
                 </div>
 
                 {/* Latest Recipes Sidebar */}
-                <aside className="w-full lg:w-1/4 px-4 mt-8 lg:mt-0 lg:ml-32">
+                <aside className="w-full lg:w-1/4 px-4 mt-8 lg:mt-0 lg:ml-10">
                     <h2 className="font-sub-heading mb-4">Latest Recipes</h2>
                     <div className="space-y-4">
                         {[...Array(4)].map((_, index) => (

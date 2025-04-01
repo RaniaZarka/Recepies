@@ -28,11 +28,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} bg-softWhite text-gray-900 min-h-screen flex flex-col`}>
         <ThemeProvider>
+
           <Header />
           <main className="flex-grow font-normal">
             {children}
           </main>
           <Footer />
+
         </ThemeProvider>
       </body>
     </html>
