@@ -20,7 +20,7 @@ interface CategoryPageProps {
     }>;
 }
 
-// ✅ THIS IS THE RIGHT WAY TO DO METADATA
+/* // ✅ THIS IS THE RIGHT WAY TO DO METADATA
 export async function generateMetadata(
     props: {
         params: Promise<{ category: string }>;
@@ -30,7 +30,7 @@ export async function generateMetadata(
     return {
         title: `${params.category} Recipes`,
     };
-}
+} */
 
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
