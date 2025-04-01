@@ -21,7 +21,8 @@ interface Recipe {
     }[];
 }
 
-export default async function RecipePage({ params }: { params: { slug: string } }) {
+export default async function RecipePage(props: { params: Promise<{ slug: string }> }) {
+    const params = await props.params;
     const query = groq`
     *[_type == "recipe" && slug.current == lower($slug)][0]{
       _id,

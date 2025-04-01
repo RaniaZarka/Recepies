@@ -21,11 +21,12 @@ interface CategoryPageProps {
 }
 
 // ✅ THIS IS THE RIGHT WAY TO DO METADATA
-export async function generateMetadata({
-    params,
-}: {
-    params: { category: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+    props: {
+        params: Promise<{ category: string }>;
+    }
+): Promise<Metadata> {
+    const params = await props.params;
     return {
         title: `${params.category} Recipes`,
     };
