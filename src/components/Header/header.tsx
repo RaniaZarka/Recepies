@@ -84,10 +84,10 @@ const Header = () => {
 
             {/* Nav Menu */}
             <ul className={`md:flex items-center justify-between w-full md:w-auto ${menuOpen ? "block" : "hidden"} mt-4 md:mt-0 space-y-4 md:space-y-0`}>
-                <li className="hover:font-semibold"><Link href="/">Home</Link></li>
+                <li className="hover:font-semibold">   <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link> </li>
 
                 <li className="md:ml-5 hover:font-semibold">
-                    <button onClick={() => setIsModalOpen(true)} className="nav-link">Recipes</button>
+                    <button onClick={() => { setIsModalOpen(true); setMenuOpen(false); }} className="nav-link">Recipes</button>
                 </li>
 
                 {/* Search Form */}
@@ -129,81 +129,83 @@ const Header = () => {
             </ul>
 
             {/* Modal */}
-            {isModalOpen && (
-                <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
-                    <div className="modal-content text-sm md:text-base" onClick={(e) => e.stopPropagation()}>
-                        <button onClick={() => setIsModalOpen(false)} className="modal-close">✖</button>
-                        <div className="recipe-grid">
-                            {/* Categories */}
-                            <div>
-                                <p className="font-bold-medium mb-2">Category</p>
-                                <ul className="space-y-1">
-                                    {categories.length > 0 ? (
-                                        categories.map((item: any) => (
-                                            <li key={item._id}>
-                                                <Link
-                                                    href={`/explore/${item.slug.current}`}
-                                                    className="nav-link whitespace-nowrap"
-                                                    onClick={() => setIsModalOpen(false)}
-                                                >
-                                                    {item.name}
-                                                </Link>
-                                            </li>
-                                        ))
-                                    ) : (
-                                        <li className="text-gray-400 text-sm">No categories found</li>
-                                    )}
-                                </ul>
-                            </div>
+            {
+                isModalOpen && (
+                    <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+                        <div className="modal-content text-sm md:text-base" onClick={(e) => e.stopPropagation()}>
+                            <button onClick={() => setIsModalOpen(false)} className="modal-close">✖</button>
+                            <div className="recipe-grid">
+                                {/* Categories */}
+                                <div>
+                                    <p className="font-bold-medium mb-2">Category</p>
+                                    <ul className="space-y-1">
+                                        {categories.length > 0 ? (
+                                            categories.map((item: any) => (
+                                                <li key={item._id}>
+                                                    <Link
+                                                        href={`/explore/${item.slug.current}`}
+                                                        className="nav-link whitespace-nowrap"
+                                                        onClick={() => setIsModalOpen(false)}
+                                                    >
+                                                        {item.name}
+                                                    </Link>
+                                                </li>
+                                            ))
+                                        ) : (
+                                            <li className="text-gray-400 text-sm">No categories found</li>
+                                        )}
+                                    </ul>
+                                </div>
 
-                            {/* Cuisine */}
-                            <div>
-                                <p className="font-bold-medium mb-2">Cuisine</p>
-                                <ul className="space-y-1">
-                                    {cuisines.length > 0 ? (
-                                        cuisines.map((item: any) => (
-                                            <li key={item._id}>
-                                                <Link
-                                                    href={`/explore/${item.slug.current}`}
-                                                    className="nav-link whitespace-nowrap"
-                                                    onClick={() => setIsModalOpen(false)}
-                                                >
-                                                    {item.name}
-                                                </Link>
-                                            </li>
-                                        ))
-                                    ) : (
-                                        <li className="text-gray-400 text-sm">No cuisines found</li>
-                                    )}
-                                </ul>
-                            </div>
+                                {/* Cuisine */}
+                                <div>
+                                    <p className="font-bold-medium mb-2">Cuisine</p>
+                                    <ul className="space-y-1">
+                                        {cuisines.length > 0 ? (
+                                            cuisines.map((item: any) => (
+                                                <li key={item._id}>
+                                                    <Link
+                                                        href={`/explore/${item.slug.current}`}
+                                                        className="nav-link whitespace-nowrap"
+                                                        onClick={() => setIsModalOpen(false)}
+                                                    >
+                                                        {item.name}
+                                                    </Link>
+                                                </li>
+                                            ))
+                                        ) : (
+                                            <li className="text-gray-400 text-sm">No cuisines found</li>
+                                        )}
+                                    </ul>
+                                </div>
 
-                            {/* Tags */}
-                            <div>
-                                <p className="font-bold-medium mb-2">Themes</p>
-                                <ul className="space-y-1">
-                                    {tags.length > 0 ? (
-                                        tags.map((item: any) => (
-                                            <li key={item._id}>
-                                                <Link
-                                                    href={`/explore/${item.slug.current}`}
-                                                    className="nav-link whitespace-nowrap"
-                                                    onClick={() => setIsModalOpen(false)}
-                                                >
-                                                    {item.name}
-                                                </Link>
-                                            </li>
-                                        ))
-                                    ) : (
-                                        <li className="text-gray-400 text-sm">No tags found</li>
-                                    )}
-                                </ul>
+                                {/* Tags */}
+                                <div>
+                                    <p className="font-bold-medium mb-2">Themes</p>
+                                    <ul className="space-y-1">
+                                        {tags.length > 0 ? (
+                                            tags.map((item: any) => (
+                                                <li key={item._id}>
+                                                    <Link
+                                                        href={`/explore/${item.slug.current}`}
+                                                        className="nav-link whitespace-nowrap"
+                                                        onClick={() => setIsModalOpen(false)}
+                                                    >
+                                                        {item.name}
+                                                    </Link>
+                                                </li>
+                                            ))
+                                        ) : (
+                                            <li className="text-gray-400 text-sm">No tags found</li>
+                                        )}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </header>
+                )
+            }
+        </header >
     );
 };
 
