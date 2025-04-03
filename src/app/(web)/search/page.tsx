@@ -3,6 +3,7 @@ import client from "@/sanity/sanityClient";
 import { urlFor } from "@/sanity/imageBuilder";
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from 'next';
 
 interface Recipe {
     _id: string;
@@ -11,8 +12,32 @@ interface Recipe {
     image: any;
 }
 
-export default async function SearchPage({ searchParams }: { searchParams: { term?: string } }) {
-    const term = searchParams.term || "";
+interface SearchPageProps {
+    searchParams: { term?: string };
+}
+
+// ✅ Optional dynamic metadata
+export async function generateMetadata({
+    searchParams,
+}: SearchPageProps): Promise<Metadata> {
+    const term = searchParams.term || "Search";
+    return {
+        title: `${term} Recipes`,
+    };
+}
+
+// ✅ Page
+export default async function SearchPage({ searchParams }: SearchPageProps) {
+    const term = searchParams.term?.toLowerCase() || "";
+
+    if (!term.trim()) {
+        return (
+            <div className="container mx-auto px-4 py-8">
+                <h1 className="text-3xl font-bold mb-6">Search</h1>
+                <p>Please enter a search term.</p>
+            </div>
+        );
+    }
 
     const query = groq`
     *[
@@ -32,11 +57,13 @@ export default async function SearchPage({ searchParams }: { searchParams: { ter
     }
   `;
 
-    const recipes: Recipe[] = await client.fetch(query, { term: `*${term}*` });
+    const recipes: Recipe[] = await client.fetch(query, { term });
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-6">Search results for &quot;{term}&quot;</h1>
+            <h1 className="text-3xl font-bold mb-6">
+                Search results for {term.charAt(0).toUpperCase() + term.slice(1)}
+            </h1>
             {recipes.length === 0 ? (
                 <p>No matching recipes found.</p>
             ) : (
