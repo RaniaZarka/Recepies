@@ -17,6 +17,7 @@ interface Recipe {
     cuisine: string;
     ingredient: {
         quantity: string;
+        unit: { abbreviation: string }
         ingredient: { name: string };
     }[];
 }
@@ -38,6 +39,7 @@ export default async function RecipePage(props: { params: Promise<{ slug: string
       "cuisine": cuisine->name,
       ingredient[] {
         quantity,
+        unit ->{abbreviation},
         ingredient-> {
           name
         }
@@ -87,10 +89,10 @@ export default async function RecipePage(props: { params: Promise<{ slug: string
                 {/* Ingredients */}
                 <div className='ml-0 lg:ml-20'>
                     <h2 className="text-2xl font-semibold mb-4">Ingredients</h2>
-                    <ul className="list-disc list-inside text-gray-800">
+                    <ul className="list-disc list-inside text-gray-800 space-y-2">
                         {recipe.ingredient?.map((ing, i) => (
                             <li key={i}>
-                                {ing.quantity} {ing.ingredient?.name}
+                                {ing.quantity} {ing.unit?.abbreviation || ''} {ing.ingredient?.name}
                             </li>
                         ))}
                     </ul>
@@ -117,8 +119,8 @@ export default async function RecipePage(props: { params: Promise<{ slug: string
 
             {/* Method */}
             <div className="mt-10">
-                <h2 className="text-2xl font-semibold mb-4">Method</h2>
-                <div className="prose max-w-none">
+                <h2 className="text-2xl font-semibold mb-4 ">Method</h2>
+                <div className="prose max-w-none space-y-2">
                     {recipe.method?.map((block: any, index: number) => (
                         <p key={index}>{block.children?.[0]?.text}</p>
                     ))}

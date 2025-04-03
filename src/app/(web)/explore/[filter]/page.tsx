@@ -55,10 +55,17 @@ export default async function ExplorePage({ params }: ExplorePageProps) {
 
     const recipes: Recipe[] = await client.fetch(query, { filter });
 
+    function formatTitle(slug: string) {
+        return slug
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    }
+
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-3xl font-bold mb-6">
-                {filter.charAt(0).toUpperCase() + filter.slice(1)} Recipes
+                {formatTitle(filter)} Recipes
             </h1>
 
             {recipes.length === 0 ? (
