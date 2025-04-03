@@ -129,7 +129,8 @@ const Header = () => {
                                         {categories.length > 0 ? (
                                             categories.map((item: any) => (
                                                 <li key={item._id}>
-                                                    <Link href={`/explore/${item.slug.current}`} className="nav-link">
+                                                    <Link href={`/explore/${item.slug.current}`} className="nav-link"
+                                                        onClick={() => setIsModalOpen(false)}  >
                                                         {item.name}
                                                     </Link>
                                                 </li>
@@ -147,7 +148,8 @@ const Header = () => {
                                         {cuisines.length > 0 ? (
                                             cuisines.map((item: any) => (
                                                 <li key={item._id}>
-                                                    <Link href={`/explore/${item.slug.current}`} className="nav-link">
+                                                    <Link href={`/explore/${item.slug.current}`} className="nav-link"
+                                                        onClick={() => setIsModalOpen(false)}  >
                                                         {item.name}
                                                     </Link>
                                                 </li>
@@ -165,7 +167,8 @@ const Header = () => {
                                         {tags.length > 0 ? (
                                             tags.map((item: any) => (
                                                 <li key={item._id}>
-                                                    <Link href={`/explore/${item.slug.current}`} className="nav-link">
+                                                    <Link href={`/explore/${item.slug.current}`} className="nav-link"
+                                                        onClick={() => setIsModalOpen(false)}  >
                                                         {item.name}
                                                     </Link>
                                                 </li>

@@ -15,15 +15,19 @@ interface Recipe {
 }
 
 interface ExplorePageProps {
-    params: {
+    params: Promise<{
         filter: string;
-    };
+    }>;
 }
 
 // ✅ Optional: dynamic title for SEO
-export async function generateMetadata({
-    params,
-}: ExplorePageProps): Promise<Metadata> {
+export async function generateMetadata(
+    props: {
+        params: Promise<{ filter: string }>;
+
+    }
+): Promise<Metadata> {
+    const params = await props.params;
     return {
         title: `${params.filter} Recipes`,
     };
@@ -31,7 +35,7 @@ export async function generateMetadata({
 
 
 export default async function ExplorePage({ params }: ExplorePageProps) {
-    const filter = params.filter;
+    const filter = (await params).filter;
 
     const query = groq`
     *[
