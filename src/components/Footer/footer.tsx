@@ -3,7 +3,7 @@ import { BsFillSendFill } from "react-icons/bs";
 
 const Footer = () => {
     return (
-        <footer className="mt-auto bg-tertiary-light h-16">
+        <footer className="mt-auto h-16 border-t border-gray-300">
             <div className="container mx-auto px-4 mb-5 h-full">
                 <div className="flex flex-wrap md:flex-nowrap sm:gap-4 md:gap-16 items-center justify-between h-full">
                     <p className="text-sm md:text-base">Copyright  © 2025 The Recipes </p>
