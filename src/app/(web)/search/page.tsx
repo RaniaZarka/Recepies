@@ -13,14 +13,14 @@ interface Recipe {
 }
 
 interface SearchPageProps {
-    searchParams: { term?: string };
+    searchParams: Promise<{ term?: string }>;
 }
 
 // ✅ Optional dynamic metadata
 export async function generateMetadata({
     searchParams,
 }: SearchPageProps): Promise<Metadata> {
-    const term = searchParams.term || "Search";
+    const term = await (await searchParams).term || "Search";
     return {
         title: `${term} Recipes`,
     };
@@ -28,7 +28,7 @@ export async function generateMetadata({
 
 // ✅ Page
 export default async function SearchPage({ searchParams }: SearchPageProps) {
-    const term = searchParams.term?.toLowerCase() || "";
+    const term = (await searchParams).term?.toLowerCase() || "";
 
     if (!term.trim()) {
         return (
