@@ -14,6 +14,14 @@ interface Recipe {
     image: any;
 }
 
+// ✅ CategoryPageProps included for reference/future use
+interface CategoryPageProps {
+    params: Promise<{
+        category: string;
+    }>;
+}
+
+// ✅ Actual props used here
 interface ExplorePageProps {
     params: {
         filter: string;
