@@ -107,7 +107,7 @@ const Header = () => {
                 </li>
 
                 {/* Theme Toggle */}
-                <li className="hidden md:flex items-center ml-2">
+                {/* <li className="hidden md:flex items-center ml-2">
                     {darkTheme ? (
                         <MdOutlineLightMode
                             className="cursor-pointer"
@@ -125,7 +125,7 @@ const Header = () => {
                             }}
                         />
                     )}
-                </li>
+                </li> */}
             </ul>
 
             {/* Modal */}
