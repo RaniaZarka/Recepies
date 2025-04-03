@@ -14,14 +14,6 @@ interface Recipe {
     image: any;
 }
 
-// ✅ CategoryPageProps included for reference/future use
-interface CategoryPageProps {
-    params: Promise<{
-        category: string;
-    }>;
-}
-
-// ✅ Actual props used here
 interface ExplorePageProps {
     params: {
         filter: string;
@@ -31,13 +23,12 @@ interface ExplorePageProps {
 // ✅ Optional: dynamic title for SEO
 export async function generateMetadata({
     params,
-}: {
-    params: { filter: string };
-}): Promise<Metadata> {
+}: ExplorePageProps): Promise<Metadata> {
     return {
         title: `${params.filter} Recipes`,
     };
 }
+
 
 export default async function ExplorePage({ params }: ExplorePageProps) {
     const filter = params.filter;
