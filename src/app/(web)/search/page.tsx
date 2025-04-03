@@ -36,7 +36,7 @@ export default async function SearchPage({ searchParams }: { searchParams: { ter
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-6">Search results for "{term}"</h1>
+            <h1 className="text-3xl font-bold mb-6">Search results for &quot;{term}&quot;</h1>
             {recipes.length === 0 ? (
                 <p>No matching recipes found.</p>
             ) : (
