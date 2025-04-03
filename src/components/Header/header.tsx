@@ -84,9 +84,9 @@ const Header = () => {
 
             {/* Nav Menu */}
             <ul className={`md:flex items-center justify-between w-full md:w-auto ${menuOpen ? "block" : "hidden"} mt-4 md:mt-0 space-y-4 md:space-y-0`}>
-                <li><Link href="/">Home</Link></li>
+                <li className="hover:font-semibold"><Link href="/">Home</Link></li>
 
-                <li className="md:ml-5">
+                <li className="md:ml-5 hover:font-semibold">
                     <button onClick={() => setIsModalOpen(true)} className="nav-link">Recipes</button>
                 </li>
 

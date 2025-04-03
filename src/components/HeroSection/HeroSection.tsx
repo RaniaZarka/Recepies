@@ -1,6 +1,10 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import food from "@/Images/food.jpg";
+import client from "@/sanity/sanityClient";
+import { urlFor } from "@/sanity/imageBuilder";
 
 const categories = [
     { title: "Breakfast", image: "/Images/breakfast.jpg" },
@@ -13,9 +17,37 @@ const categories = [
     { title: "Soups", image: "/Images/soups.jpg" },
 ];
 
+interface Recipe {
+    _id: string;
+    name: string;
+    slug: { current: string };
+    image: any;
+}
+
 export default function HeroSection() {
-    const slugify = (str: string) =>
-        str.toLowerCase().replace(/\s+/g, "-"); // e.g., "Main Course" → "main-course"
+    const [latestRecipes, setLatestRecipes] = useState<Recipe[]>([]);
+
+    const slugify = (str: string) => str.toLowerCase().replace(/\s+/g, "-");
+
+    useEffect(() => {
+        const fetchLatestRecipes = async () => {
+            const query = `*[_type == "recipe"] | order(_createdAt desc)[0...4] {
+        _id,
+        name,
+        slug,
+        image
+      }`;
+
+            try {
+                const data: Recipe[] = await client.fetch(query);
+                setLatestRecipes(data);
+            } catch (error) {
+                console.error("Error fetching latest recipes:", error);
+            }
+        };
+
+        fetchLatestRecipes();
+    }, []);
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -27,7 +59,6 @@ export default function HeroSection() {
                 </p>
             </section>
 
-            {/* Main Content */}
             <div className="flex flex-wrap -mx-6">
                 {/* Recipe Categories Grid */}
                 <div className="w-full lg:w-2/3 px-4">
@@ -54,19 +85,33 @@ export default function HeroSection() {
 
                 {/* Latest Recipes Sidebar */}
                 <aside className="w-full lg:w-1/4 px-4 mt-8 lg:mt-0 lg:ml-10">
-                    <h2 className="font-sub-heading mb-4">Latest Recipes</h2>
-                    <div className="space-y-4">
-                        {[...Array(4)].map((_, index) => (
-                            <div key={index} className="bg-white shadow-md rounded-md p-4 flex items-center">
-                                <Image src={food} alt={`Latest Recipe ${index + 1}`} width={100} height={100} />
-                                <div className="ml-2">
-                                    <h3 className="text-md font-semibold">Latest Recipe {index + 1}</h3>
-                                    <p className="text-sm text-gray-600">Quick description here.</p>
+                    <h2 className="font-sub-heading mb-4 text-xl font-bold">Latest Recipes</h2>
+                    <div className="space-y-6">
+                        {latestRecipes.map((recipe) => (
+                            <Link
+                                href={`/recipes/${recipe.slug.current}`}
+                                key={recipe._id}
+                                className="block"
+                            >
+                                <div className="bg-white shadow-md rounded-md p-2 flex items-center gap-3 hover:shadow-lg transition">
+                                    <Image
+                                        src={
+                                            recipe.image
+                                                ? urlFor(recipe.image).width(80).height(80).url()
+                                                : "/Images/fallback.jpg"
+                                        }
+                                        alt={recipe.name}
+                                        width={80}
+                                        height={80}
+                                        className="rounded object-cover"
+                                    />
+                                    <div className="text-sm font-semibold">{recipe.name}</div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </aside>
+
             </div>
         </div>
     );
