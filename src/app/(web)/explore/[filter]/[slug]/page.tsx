@@ -2,6 +2,7 @@ import { groq } from 'next-sanity';
 import client from '@/sanity/sanityClient';
 import { urlFor } from '@/sanity/imageBuilder';
 import Image from 'next/image';
+import Breadcrumbs from '@/components/Breadcrumps/breadcrumps';
 
 interface Recipe {
     _id: string;
@@ -17,13 +18,14 @@ interface Recipe {
     cuisine: string;
     ingredient: {
         quantity: string;
-        unit: { abbreviation: string }
+        unit: { abbreviation: string };
         ingredient: { name: string };
     }[];
 }
 
-export default async function RecipePage(props: { params: Promise<{ slug: string }> }) {
-    const params = await props.params;
+export default async function RecipePage(props: { params: Promise<{ filter: string; slug: string }> }) {
+    const { filter, slug } = await props.params;
+
     const query = groq`
     *[_type == "recipe" && slug.current == lower($slug)][0]{
       _id,
@@ -40,18 +42,31 @@ export default async function RecipePage(props: { params: Promise<{ slug: string
       ingredient[] {
         quantity,
         unit ->{abbreviation},
-        ingredient-> {
-          name
-        }
+        ingredient-> { name }
       }
     }
   `;
 
-    const recipe: Recipe = await client.fetch(query, { slug: params.slug });
+    const recipe: Recipe = await client.fetch(query, { slug });
     if (!recipe) return <div className="p-8">Recipe not found.</div>;
+
+    function capitalize(str: string) {
+        return str
+            .split('-')
+            .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+            .join(' ');
+    }
 
     return (
         <div className="container mx-auto px-4 py-8">
+            <Breadcrumbs
+                crumbs={[
+                    { label: 'Home', href: '/' },
+                    { label: capitalize(filter), href: `/explore/${filter}` },
+                    { label: recipe.name }
+                ]}
+            />
+
             <h1 className="text-4xl font-bold mb-4">{recipe.name}</h1>
 
             {/* Tags & Cuisine */}
@@ -71,9 +86,8 @@ export default async function RecipePage(props: { params: Promise<{ slug: string
                 )}
             </div>
 
-            {/* Image & Ingredients side by side */}
+            {/* Image & Ingredients */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-8">
-                {/* Image */}
                 {recipe.image && (
                     <div className="relative w-full h-96 rounded overflow-hidden">
                         <Image
@@ -86,7 +100,6 @@ export default async function RecipePage(props: { params: Promise<{ slug: string
                     </div>
                 )}
 
-                {/* Ingredients */}
                 <div className='ml-0 lg:ml-20'>
                     <h2 className="text-2xl font-semibold mb-4">Ingredients</h2>
                     <ul className="list-disc list-inside text-gray-800 space-y-2">
@@ -102,19 +115,11 @@ export default async function RecipePage(props: { params: Promise<{ slug: string
             {/* Time & Difficulty */}
             <div className="mb-6 text-gray-700">
                 <div className="flex flex-wrap gap-4 mb-1">
-                    <p>
-                        <strong>Prep Time:</strong> {recipe.prepTime} min
-                    </p>
-                    <p>
-                        <strong>Cook Time:</strong> {recipe.cookTime} min
-                    </p>
-                    <p>
-                        <strong>Servings:</strong> {recipe.servings}
-                    </p>
+                    <p><strong>Prep Time:</strong> {recipe.prepTime} min</p>
+                    <p><strong>Cook Time:</strong> {recipe.cookTime} min</p>
+                    <p><strong>Servings:</strong> {recipe.servings}</p>
                 </div>
-                <p>
-                    <strong>Difficulty:</strong> {recipe.difficulty}
-                </p>
+                <p><strong>Difficulty:</strong> {recipe.difficulty}</p>
             </div>
 
             {/* Method */}

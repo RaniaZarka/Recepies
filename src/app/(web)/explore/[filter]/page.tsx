@@ -4,6 +4,7 @@ import { urlFor } from '@/sanity/imageBuilder';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import Breadcrumbs from '@/components/Breadcrumps/breadcrumps';
 
 interface Recipe {
     _id: string;
@@ -12,6 +13,7 @@ interface Recipe {
         current: string;
     };
     image: any;
+
 }
 
 interface ExplorePageProps {
@@ -49,7 +51,8 @@ export default async function ExplorePage({ params }: ExplorePageProps) {
       _id,
       name,
       slug,
-      image
+      image,
+      
     }
   `;
 
@@ -64,6 +67,7 @@ export default async function ExplorePage({ params }: ExplorePageProps) {
 
     return (
         <div className="container mx-auto px-4 py-8">
+            <Breadcrumbs />
             <h1 className="text-3xl font-bold mb-6">
                 {formatTitle(filter)} Recipes
             </h1>
@@ -73,7 +77,7 @@ export default async function ExplorePage({ params }: ExplorePageProps) {
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {recipes.map((recipe) => (
-                        <Link href={`/recipes/${recipe.slug.current}`} key={recipe._id}>
+                        <Link href={`/explore/${filter}/${recipe.slug.current}`} key={recipe._id}>
                             <div className="bg-white shadow-md rounded-md overflow-hidden hover:scale-105 transition-transform">
                                 <div className="relative w-full h-48">
                                     <Image
