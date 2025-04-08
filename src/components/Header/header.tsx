@@ -77,9 +77,9 @@ const Header = () => {
                 <div onClick={() => setMenuOpen(!menuOpen)}>
                     {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
                 </div>
-                <div onClick={() => setDarkTheme(!darkTheme)}>
+                {/* <div onClick={() => setDarkTheme(!darkTheme)}>
                     {darkTheme ? <MdOutlineLightMode size={18} /> : <MdDarkMode size={18} />}
-                </div>
+                </div> */}
             </div>
 
             {/* Nav Menu */}
