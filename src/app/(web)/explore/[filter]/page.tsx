@@ -79,8 +79,8 @@ export default async function ExplorePage({ params }: ExplorePageProps) {
                     {recipes.map((recipe) => (
                         <Link href={`/explore/${filter}/${recipe.slug.current}`} key={recipe._id}>
                             <div className="bg-white shadow-md rounded-md overflow-hidden hover:scale-105 transition-transform">
-                                <div className="relative w-full h-48">
-                                    <Image
+                                <div className="relative  w-full h-48">
+                                    <Image className='object-cover'
                                         src={
                                             recipe.image
                                                 ? urlFor(recipe.image).width(600).height(400).url()
@@ -88,7 +88,7 @@ export default async function ExplorePage({ params }: ExplorePageProps) {
                                         }
                                         alt={recipe.name || 'Recipe image'}
                                         fill
-                                        style={{ objectFit: 'cover' }}
+
                                     />
                                 </div>
                                 <div className="p-4">

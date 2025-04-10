@@ -99,7 +99,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                             >
                                 <div className="bg-white shadow-md rounded-md overflow-hidden hover:scale-105 transition-transform">
                                     <div className="relative w-full h-48">
-                                        <Image
+                                        <Image className="object-cover"
                                             src={
                                                 recipe.image
                                                     ? urlFor(recipe.image).width(600).height(400).url()
@@ -107,7 +107,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                                             }
                                             alt={recipe.name}
                                             fill
-                                            style={{ objectFit: "cover" }}
+
                                         />
                                     </div>
                                     <div className="p-4">

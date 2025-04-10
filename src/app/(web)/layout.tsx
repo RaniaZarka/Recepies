@@ -5,6 +5,7 @@ import { Poppins } from 'next/font/google'
 
 import ThemeProvider from '@/components/ThemeProvider/ThemeProvider';
 import Footer from '@/components/Footer/footer';
+
 //import Footer from '@/components/Footer/footer';
 
 const poppins = Poppins({
@@ -32,6 +33,7 @@ export default function RootLayout({
           <Header />
           <main className="flex-grow font-normal">
             {children}
+
           </main>
           <Footer />
 

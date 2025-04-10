@@ -90,12 +90,12 @@ export default async function RecipePage(props: { params: Promise<{ filter: stri
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-8">
                 {recipe.image && (
                     <div className="relative w-full h-96 rounded overflow-hidden">
-                        <Image
+                        <Image className="rounded-lg object-cover"
                             src={urlFor(recipe.image).width(800).height(500).url()}
                             alt={recipe.name}
                             fill
-                            style={{ objectFit: 'cover' }}
-                            className="rounded-lg"
+
+
                         />
                     </div>
                 )}
