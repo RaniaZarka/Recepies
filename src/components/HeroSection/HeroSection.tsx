@@ -22,6 +22,12 @@ interface Recipe {
     name: string;
     slug: { current: string };
     image: any;
+    category?: {
+        title: string;
+        slug: {
+            current: string;
+        };
+    };
 }
 
 export default function HeroSection() {
@@ -31,11 +37,13 @@ export default function HeroSection() {
 
     useEffect(() => {
         const fetchLatestRecipes = async () => {
-            const query = `*[_type == "recipe"] | order(_createdAt desc)[0...4] {
+            const query = `*[_type == "recipe"] | 
+            order(_createdAt desc)[0...4] {
         _id,
         name,
         slug,
-        image
+        image,
+        category->{ title, slug }
       }`;
 
             try {
@@ -88,28 +96,31 @@ export default function HeroSection() {
                 <aside className="w-full lg:w-1/4 px-4 mt-8 lg:mt-0 lg:ml-10">
                     <h2 className="font-sub-heading mb-4 text-xl font-bold">Latest Recipes</h2>
                     <div className="space-y-6">
-                        {latestRecipes.map((recipe) => (
-                            <Link
-                                href={`/recipes/${recipe.slug.current}`}
-                                key={recipe._id}
-                                className="block"
-                            >
-                                <div className="bg-white shadow-md rounded-md p-2 flex items-center gap-3 hover:shadow-lg transition">
-                                    <Image
-                                        src={
-                                            recipe.image
-                                                ? urlFor(recipe.image).width(80).height(80).url()
-                                                : "/Images/fallback.jpg"
-                                        }
-                                        alt={recipe.name}
-                                        width={80}
-                                        height={80}
-                                        className="rounded object-cover"
-                                    />
-                                    <div className="text-sm font-semibold">{recipe.name}</div>
-                                </div>
-                            </Link>
-                        ))}
+                        {latestRecipes.map((recipe) => {
+                            const categorySlug = recipe.category?.slug?.current;
+                            return (
+                                <Link
+                                    href={`/explore/${categorySlug}/${recipe.slug.current}`}
+                                    key={recipe._id}
+                                    className="block"
+                                >
+                                    <div className="bg-white shadow-md rounded-md p-2 flex items-center gap-3 hover:shadow-lg transition">
+                                        <Image
+                                            src={
+                                                recipe.image
+                                                    ? urlFor(recipe.image).width(80).height(80).url()
+                                                    : "/Images/fallback.jpg"
+                                            }
+                                            alt={recipe.name}
+                                            width={80}
+                                            height={80}
+                                            className="rounded object-cover"
+                                        />
+                                        <div className="text-sm font-semibold">{recipe.name}</div>
+                                    </div>
+                                </Link>
+                            );
+                        })}
                     </div>
                 </aside>
 
