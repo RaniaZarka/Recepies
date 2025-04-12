@@ -3,8 +3,9 @@ import client from '@/sanity/sanityClient';
 import { urlFor } from '@/sanity/imageBuilder';
 import Image from 'next/image';
 import Breadcrumbs from '@/components/Breadcrumps/breadcrumps';
+import { Recipe } from '@/interfaces/recipe';
 
-interface Recipe {
+/* interface Recipe {
     _id: string;
     name: string;
     slug: { current: string };
@@ -21,7 +22,7 @@ interface Recipe {
         unit: { abbreviation: string };
         ingredient: { name: string };
     }[];
-}
+} */
 
 export default async function RecipePage(props: { params: Promise<{ filter: string; slug: string }> }) {
     const { filter, slug } = await props.params;

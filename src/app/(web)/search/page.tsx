@@ -5,8 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumps/breadcrumps";
+import { Recipe as BaseRecipe } from '@/interfaces/recipe';
 
-interface Recipe {
+/* interface Recipe {
     _id: string;
     name: string;
     slug: { current: string };
@@ -17,7 +18,16 @@ interface Recipe {
             current: string;
         };
     };
-}
+} */
+
+type RecipeWithCategory = BaseRecipe & {
+    category?: {
+        title: string;
+        slug: {
+            current: string;
+        };
+    };
+};
 
 interface SearchPageProps {
     searchParams: Promise<{ term?: string }>;
@@ -63,7 +73,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     }
   `;
 
-    const recipes: Recipe[] = await client.fetch(query, { term });
+    const recipes: RecipeWithCategory[] = await client.fetch(query, { term });
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -82,7 +92,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                 <p>No matching recipes found.</p>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {recipes.map((recipe: Recipe) => {
+                    {recipes.map((recipe: RecipeWithCategory) => {
                         const categorySlug = recipe.category?.slug?.current;
 
                         if (!categorySlug) {

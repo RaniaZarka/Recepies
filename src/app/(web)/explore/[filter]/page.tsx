@@ -5,8 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Breadcrumbs from '@/components/Breadcrumps/breadcrumps';
+import { Recipe } from '@/interfaces/recipe';
 
-interface Recipe {
+/* interface Recipe {
     _id: string;
     name: string;
     slug: {
@@ -14,7 +15,7 @@ interface Recipe {
     };
     image: any;
 
-}
+} */
 
 interface ExplorePageProps {
     params: Promise<{
